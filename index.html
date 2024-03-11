@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon"
+        href="https://raw.githubusercontent.com/agussaifuddin/logo/main/token/agus200x200.png">
+    <title>Agus Crypto</title>
+    <meta name="description"
+        content="AGUS is a crypto token project with two main dimensions: as the creator's name and as a concept of personal branding. In this context, the project represents $AGUS's effort to leverage blockchain and crypto technology to build a stronger digital reputation and self-recognition.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script>
+
+        async function detectAndSwitchNetwork() {
+            if (typeof window.ethereum !== 'undefined') {
+                const ethereum = window.ethereum;
+
+                try {
+
+                    const chainId = await ethereum.request({ method: 'eth_chainId' });
+
+                    if (chainId !== '0x38') {
+
+                        await ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x38' }] });
+                    }
+                } catch (error) {
+                    console.error('Tidak dapat mengganti jaringan:', error);
+                }
+            } else {
+                console.log('Web3 tidak terdeteksi. Pastikan MetaMask atau penyedia Web3 lainnya terinstal.');
+            }
+        }
+
+        window.addEventListener('load', detectAndSwitchNetwork);
+
+        await window.ethereum.request({
+            "method": "wallet_watchAsset",
+            "params": {
+                "type": "ERC20",
+                "options": {
+                    "address": "0x334eD8117A7cd5EfA17681093C3e66af61F877c1",
+                    "symbol": "AGUS",
+                    "decimals": 18,
+                    "image": "https://raw.githubusercontent.com/aguscryptocom/images/main/token/agus200x200.png",
+                    "tokenId": "56"
+                }
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="welcome" class="welcome">
+        <h1>WELCOME TO AGUS</h1>
+    </div>
+    <div id="content" class="content">
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/agussaifuddin/logo/main/token/agus100x100.png" width="100"
+                    height="100" alt="Token Logo">
+                <h1>Agus Crypto</h1>
+                <p>Uniting Identity and Branding.</p>
+            </div>
+            <div>
+                <nav>
+                    <ul>
+                        <li><a href="https://aguscrypto.com/about/">About</a></li>
+                        <li><a href="https://aguscrypto.com/blog/">Blog</a></li>
+                        <li><a href="https://aguscrypto.com/token/">Token</a></li>
+                        <li><a
+                                href="https://app.aguscrypto.com/#/swap?outputCurrency=0x334eD8117A7cd5EfA17681093C3e66af61F877c1&inputCurrency=0x55d398326f99059fF775485246999027B3197955">Trade</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="countdown-box">
+
+                <center>
+                    <h2>Please Connect Wallet and switch network to BNB Smart Chain (BSC)</h2>
+                </center>
+                <center><button id="connectWallet">Connect Wallet</button></center>
+                <div class="countdown" id="countdown"></div>
+
+            </div>
+            <section>
+                <h2>HOW TO BUY?</h2>
+                <p>1. Copy url <b>https://app.aguscrypto.com/livesale</b> and access via Metamask/TrustWallet/AVEai dapp
+                    browser.
+                    <br /><br />
+                    2. Click connect Wallet button on this web and select/change chain network on your wallet to BSC
+                    (bnb smart chain).
+                    <br /><br />
+                    3. Need help? join our telegram group <a href="https://t.me/aguscryptocom">@AgusCryptocom</a>
+                </p>
+            </section>
+            <section id="connectedWallet" style="display: none;">
+                <section>
+                    <h2><i class="fas fa-wallet"></i> Wallet Connected</h2>
+                    <p><b>You BNB Balance:</b> <span id="bnbBalance"></span> BNB</p>
+                    <p><b>You AGUS Balance:</b> <span id="tokenBalance"></span> AGUS</p>
+                    <p><b>You Wallet:</b> <span id="walletAddress"></span></p>
+                    <p><b>AGUS Contract:</b> <span>0x334eD8117A7cd5EfA17681093C3e66af61F877c1</span></p>
+                </section>
+                <section>
+                    <h2><i class="fas fa-rocket"></i> TokenSale Information</h2>
+                    <p><b>TokenSale Price:</b> <span id="presaleRate"></span> AGUS/BNB</p>
+                    <p><b>Exchange Rate:</b> <span>10~70k</span> AGUS/BNB</p>
+                    <p><b>Min-Buy:</b> <span>0.005</span> BNB</p>
+                    <p><b>Max-Buy:</b> <span id="maxPurchase"></span> BNB/Wallet</p>
+                    <p><b>Soft Cap:</b> <span>5</span> BNB</p>
+                    <p><b>Hard Cap:</b> <span>50</span> BNB</p>
+                    <p><b>Funds Raised:</b> <span id="weiRaised"></span> BNB</p>
+                </section>
+                <section>
+                    <h2><i class="fas fa-shopping-cart"></i> AGUS Purchase</h2>
+                    <form id="buyTokensForm">
+                        <label for="buyAmount">BNB Amount to Buy:</label>
+                        <input type="number" id="buyAmount" step="any" required style="width: 80%;" min="0.005">
+                        <button type="submit">BUY AGUS</button>
+                    </form>
+                    <div id="operationResult" style="display: none;">
+                        <p id="operationMessage"></p>
+                    </div>
+                </section>
+            </section>
+            <center><iframe style="height: 100vh; width: 100%;" id="geckoterminal-embed" title="GeckoTerminal Embed"
+                    src="https://www.geckoterminal.com/bsc/pools/0x7707313ca218f1027b18b8ca6ee9c2a25fa05e4c?embed=1&info=0&swaps=1"
+                    frameborder="0" allow="clipboard-write" allowfullscreen></iframe></center>
+        </main>
+        <footer>
+            <nav>
+                <ul class="footer-menu">
+                    <li><a href="https://x.com/aguscryptocom"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://t.me/aguscryptocom"><i class="fab fa-telegram"></i></a></li>
+                    <li><a href="https://fb.com/aguscryptocom"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="mailto:agus@aguscrypto.com"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="https://github.com/aguscryptocom"><i class="fa-brands fa-github"></i></a></li>
+                </ul>
+            </nav>
+        </footer>
+        <script src="./js/web3.js"></script>
+        <script type="module" src="./js/app.js"></script>
+        <script src="./js/countdown.js"></script>
+    </div>
+    <script>
+        setTimeout(function () {
+            var welcomeDiv = document.getElementById("welcome");
+            var contentDiv = document.getElementById("content");
+
+            welcomeDiv.style.display = "none";
+            contentDiv.style.display = "block";
+        }, 1000);
+    </script>
+</body>
+
+</html>
